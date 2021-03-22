@@ -22,7 +22,7 @@ file used:
 - User From Functions: bike_form_module.py
 - Data Filter Functions: bike_pd_filter_mod.py
 
-## Prerequisites
+### Prerequisites
 
 This Project required the csv files of the cities: "Chicago", "New York" and "Washington" in a folder name "data".
 The "bike_pd_filter_mod" module creates the following path to file varaible: path_to_file = './data/{city}.csv'.format(city=city) '
