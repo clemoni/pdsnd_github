@@ -7,7 +7,23 @@ import bike_pd_filter_mod as bf
 
 
 ####### FILTER DF ACCORDING TO USER ANSWER ######
+
+def print_result(message, output, start_time):
+    print(message)
+    print(output)
+    print("\nThis took %s seconds." % (time.time() - start_time))
+    print('-'*40)
+
+
 def load_data(filter_choice):
+    """Given filter_choice, filter dataFrame file
+
+    Args:
+        filter_choice ([dic]): dictionnary of user filter choice
+
+    Returns:
+        [dataFrame]: the filtered dataFame
+    """
     city_name = bf.convert_city(filter_choice['city'])
     df = bf.get_city_csv(city_name)
 
@@ -27,6 +43,14 @@ def load_data(filter_choice):
 ############################
 #1 Popular times of travel#
 def time_stats(df):
+    """print a dataFrame with:
+    - most frequent month
+    - most frequent day 
+    - most frequent hour
+
+    Args:
+        df ([dataFrame]): 
+    """
     start_time = time.time()
     s_most_month = (df.index.month_name().value_counts().reset_index().max())
     s_most_day = (df.index.day_name().value_counts().reset_index().max())
@@ -38,16 +62,22 @@ def time_stats(df):
 
     df_times_travel = pd.DataFrame(data, index=['Most Frequent'])
 
-    print('Popular times of travel:')
-    print(df_times_travel)
-    print("\nThis took %s seconds." % (time.time() - start_time))
-    print('-'*40)
+    print_result('Popular times of travel:', df_times_travel, start_time)
+
 
 #############################
 #2 Popular stations and trip#
 
 
 def station_stats(df):
+    """print dataFrame with following information:
+    - most fequent Start Station
+    - most frequent End Station 
+    - most frequent Stard/End station
+
+    Args:
+        df ([dataFramer]): [description]
+    """
     start_time = time.time()
     data = list()
     data.append(df['Start Station'].mode()[0])
@@ -110,6 +140,7 @@ def user_stats(df, filter_choice):
         yob_min = int(df['Birth Year'].min())
         yob_max = int(df['Birth Year'].max())
         yob_mod = int(df['Birth Year'].mode())
+        # 2017 is constant value where file is edited
         age = 2017 - df['Birth Year']
         yob_age_mean = round(age.mean())
         data = {'Value': [yob_min, yob_max, yob_mod, yob_age_mean]}
