@@ -7,6 +7,14 @@ import bike_pd_filter_mod as bf
 
 
 ####### FILTER DF ACCORDING TO USER ANSWER ######
+
+def print_result(message, output, start_time):
+    print(message)
+    print(output)
+    print("\nThis took %s seconds." % (time.time() - start_time))
+    print('-'*40)
+
+
 def load_data(filter_choice):
     """Given filter_choice, filter dataFrame file
 
@@ -54,16 +62,15 @@ def time_stats(df):
 
     df_times_travel = pd.DataFrame(data, index=['Most Frequent'])
 
-    print('Popular times of travel:')
-    print(df_times_travel)
-    print("\nThis took %s seconds." % (time.time() - start_time))
-    print('-'*40)
+    print_result('Popular times of travel:', df_times_travel, start_time)
+
 
 #############################
 #2 Popular stations and trip#
 
 
 def station_stats(df):
+<<<<<<< HEAD
     """print dataFrame with following information:
     - most fequent Start Station
     - most frequent End Station 
@@ -72,6 +79,17 @@ def station_stats(df):
     Args:
         df ([dataFrame]): 
     """
+||||||| merged common ancestors
+=======
+    """print dataFrame with following information:
+    - most fequent Start Station
+    - most frequent End Station 
+    - most frequent Stard/End station
+
+    Args:
+        df ([dataFramer]): [description]
+    """
+>>>>>>> refactoring
     start_time = time.time()
     data = list()
     data.append(df['Start Station'].mode()[0])
@@ -81,8 +99,9 @@ def station_stats(df):
     index_list = ['Start Station', 'End Station', 'Station Start/End']
     df_station = pd.DataFrame(
         data={'Most Frequent': data}, index=index_list)
-    print('\nPopular stations and trip:')
-    print(df_station)
+
+    print_result('\nPopular stations and trip:', df_station, start_time)
+
     print("\nThis took %s seconds." % (time.time() - start_time))
     print('-'*40)
 
@@ -96,10 +115,9 @@ def trip_duration_stats(df):
         df['Trip Duration'].sum(), df['Trip Duration'].mean()]}
     index_df = ['Total travel time', 'Average travel time']
     df_trip_duration = pd.DataFrame(data=data, index=index_df)
-    print('\nTrip duration:')
-    print(df_trip_duration)
-    print("\nThis took %s seconds." % (time.time() - start_time))
-    print('-'*40)
+
+    print_result('\nTrip duration:', df_trip_duration, start_time)
+
 
 ######################################
 ##########  4.1 USER COUNT  ##########
