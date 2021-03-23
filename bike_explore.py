@@ -87,8 +87,9 @@ def station_stats(df):
     index_list = ['Start Station', 'End Station', 'Station Start/End']
     df_station = pd.DataFrame(
         data={'Most Frequent': data}, index=index_list)
-    print('\nPopular stations and trip:')
-    print(df_station)
+
+    print_result('\nPopular stations and trip:', df_station, start_time)
+
     print("\nThis took %s seconds." % (time.time() - start_time))
     print('-'*40)
 
@@ -102,10 +103,9 @@ def trip_duration_stats(df):
         df['Trip Duration'].sum(), df['Trip Duration'].mean()]}
     index_df = ['Total travel time', 'Average travel time']
     df_trip_duration = pd.DataFrame(data=data, index=index_df)
-    print('\nTrip duration:')
-    print(df_trip_duration)
-    print("\nThis took %s seconds." % (time.time() - start_time))
-    print('-'*40)
+
+    print_result('\nTrip duration:', df_trip_duration, start_time)
+
 
 ######################################
 ##########  4.1 USER COUNT  ##########
